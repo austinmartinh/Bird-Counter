@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="400.0" minWidth="600.0" prefHeight="622.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.mainController">
+   <children>
+      <MenuBar layoutX="63.0" layoutY="14.0" prefHeight="25.0" prefWidth="600.0" AnchorPane.bottomAnchor="379.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="newImage" mnemonicParsing="false" onAction="#openImagePicker" text="New Image" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteImage" text="Delete Image" />
+                  <MenuItem mnemonicParsing="false" onAction="#drawBWImage" text="Rewrite B&amp;W" />
+                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exit" text="Exit" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#redShiftImage" text="Red Channel" />
+                  <MenuItem mnemonicParsing="false" onAction="#greenShiftImage" text="Green Channel" />
+                  <MenuItem mnemonicParsing="false" onAction="#blueShiftImage" text="Blue Channel" />
+                  <MenuItem mnemonicParsing="false" onAction="#greyShiftImage" text="Grey Channel" />
+                  <MenuItem mnemonicParsing="false" onAction="#recolor" text="ReColor" />
+               </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Info">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#printSetData" text="Set Data" />
+                  <MenuItem mnemonicParsing="false" onAction="#estimateBirdNumber" text="Assess Birds" />
+                  <MenuItem mnemonicParsing="false" onAction="#mergeSets" text="Merge Sets" />
+                  <MenuItem mnemonicParsing="false" onAction="#toggleAnalysis" text="Toggle Analysis" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.19899665551839466" layoutX="-1.0" layoutY="24.0" prefHeight="383.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+        <items>
+          <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="110.0" prefHeight="381.0" prefWidth="298.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Red Channel" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0" />
+                  <Label layoutX="14.0" layoutY="64.0" text="Green Channel" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="60.0" />
+                  <Label layoutX="14.0" layoutY="115.0" text="Blue Channel" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="105.0" />
+                  <Slider fx:id="noiseSlider" blockIncrement="1.0" layoutX="9.0" layoutY="31.0" majorTickUnit="50.0" max="150.0" minorTickCount="2" onMouseReleased="#updateNoiseThreshold" prefHeight="38.0" prefWidth="133.0" showTickLabels="true" showTickMarks="true" AnchorPane.topAnchor="165.0" />
+                  <Slider fx:id="greenSlider" blockIncrement="0.01" layoutX="9.0" layoutY="81.0" max="1.0" min="-1.0" onMouseReleased="#colorShift" prefHeight="14.0" prefWidth="133.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="75.0" />
+                  <Slider fx:id="blueSlider" blockIncrement="0.01" layoutX="11.0" layoutY="132.0" max="1.0" min="-1.0" onMouseReleased="#colorShift" prefHeight="14.0" prefWidth="133.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="120.0" />
+                  <Label layoutX="10.0" layoutY="141.0" text="Pixel Threshold" AnchorPane.topAnchor="150.0" />
+                  <Slider fx:id="redSlider" blockIncrement="0.01" layoutX="11.0" layoutY="31.0" max="1.0" min="-1.0" onMouseReleased="#colorShift" prefHeight="14.0" prefWidth="133.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0" />
+                  <ImageView fx:id="averageColorViewer" fitHeight="49.0" fitWidth="79.0" layoutX="22.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label layoutX="25.0" layoutY="417.0" text="Average Color" />
+                  <Label layoutX="11.0" layoutY="316.0" text="Image Name" AnchorPane.topAnchor="316.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="11.0" layoutY="363.0" text="Image Size" AnchorPane.topAnchor="363.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="imageSize" layoutX="11.0" layoutY="380.0" prefHeight="17.0" prefWidth="187.0" />
+                  <Label fx:id="imageName" layoutX="11.0" layoutY="333.0" prefHeight="17.0" prefWidth="187.0" />
+                  <Slider fx:id="clusterSizeSlider" blockIncrement="1.0" layoutX="10.0" layoutY="220.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="38.0" prefWidth="133.0" showTickLabels="true" showTickMarks="true" value="1.0" AnchorPane.topAnchor="220.0" />
+                  <Label layoutX="10.0" layoutY="203.0" text="Cluster Size Threshold" />
+                  <Label layoutX="14.0" layoutY="504.0" text="Bird Count: " />
+                  <Label fx:id="totalBirds" layoutX="80.0" layoutY="504.0" prefHeight="17.0" prefWidth="67.0" />
+                  <Label layoutX="14.0" layoutY="531.0" text="Adjusted Bird Count: " />
+                  <Label fx:id="adjustedTotalBirds" layoutX="134.0" layoutY="531.0" prefHeight="17.0" prefWidth="70.0" />
+                  <Label layoutX="14.0" layoutY="558.0" prefHeight="17.0" prefWidth="90.0" text="Flight Direction:" />
+                  <Label fx:id="flightDirection" layoutX="104.0" layoutY="558.0" prefHeight="17.0" prefWidth="81.0" />
+                  <Label layoutX="11.0" layoutY="258.0" text="B/W Threshold" />
+                  <Slider fx:id="brightnessThreshold" blockIncrement="1.0" layoutX="9.0" layoutY="275.0" majorTickUnit="1.0" max="3.0" minorTickCount="1" prefHeight="38.0" prefWidth="133.0" showTickLabels="true" showTickMarks="true" value="1.5" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></AnchorPane>
+          <AnchorPane fx:id="rightPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ImageView fx:id="imageViewer" fitHeight="596.0" fitWidth="773.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <AnchorPane fx:id="labelPane" prefHeight="596.0" prefWidth="773.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
